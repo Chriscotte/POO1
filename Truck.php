@@ -1,12 +1,18 @@
 <?php
+
 require_once 'Vehicle.php';
 
-class Car extends Vehicle
+class Truck extends Vehicle
 {
     /**
-     * @var string
+     * @var int
      */
-    private $energy;
+    private $stockCapacity;
+
+    /**
+     * @var int
+     */
+    private $loadingLevel = 0;
 
     /**
      * @var int
@@ -15,33 +21,41 @@ class Car extends Vehicle
 
     //METHODS
 
-    public function __construct(string $color, int $nbSeats, string $energy)
+
+    public function __construct(string $color, int $nbSeats, string $energy, int $stockCapacity)
     {
         parent::__construct($color, $nbSeats);
         $this->setEnergy($energy);
+        $this->setStockCapacity($stockCapacity);
     }
 
-    public function getEnergy(): string
-    {
-        return $this->energy;
-    }
-
-    public function setEnergy(string $energy): Car
+    // Set & Get Energy Level
+    public function setEnergy(string $energy): Truck
     {
         if (in_array($energy, self::ALLOWED_ENERGIES)) {
             $this->energy = $energy;
         }
         return $this;
     }
-
     public function getEnergyLevel(): int
     {
         return $this->energyLevel;
     }
 
+    // Set & Get Loading Level
     public function setEnergyLevel(int $energyLevel): void
     {
         $this->energyLevel = $energyLevel;
+    }
+
+    public function getStockCapacity(): int
+    {
+        return $this->stockCapacity;
+    }
+
+    public function setStockCapacity(int $stockCapacity): void
+    {
+        $this->stockCapacity= $stockCapacity;
     }
 
     const ALLOWED_ENERGIES = [
