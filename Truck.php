@@ -21,7 +21,6 @@ class Truck extends Vehicle
 
     //METHODS
 
-
     public function __construct(string $color, int $nbSeats, string $energy, int $stockCapacity)
     {
         parent::__construct($color, $nbSeats);
@@ -30,6 +29,7 @@ class Truck extends Vehicle
     }
 
     // Set & Get Energy Level
+
     public function setEnergy(string $energy): Truck
     {
         if (in_array($energy, self::ALLOWED_ENERGIES)) {
@@ -37,15 +37,26 @@ class Truck extends Vehicle
         }
         return $this;
     }
+
+    public function setEnergyLevel(int $energyLevel): void
+    {
+        $this->energyLevel = $energyLevel;
+    }
+
     public function getEnergyLevel(): int
     {
         return $this->energyLevel;
     }
 
+    const ALLOWED_ENERGIES = [
+        'fuel',
+        'electric',
+    ];
+
     // Set & Get Loading Level
-    public function setEnergyLevel(int $energyLevel): void
+    public function setStockCapacity(int $stockCapacity): void
     {
-        $this->energyLevel = $energyLevel;
+        $this->stockCapacity= $stockCapacity;
     }
 
     public function getStockCapacity(): int
@@ -53,13 +64,12 @@ class Truck extends Vehicle
         return $this->stockCapacity;
     }
 
-    public function setStockCapacity(int $stockCapacity): void
+    public function loading()
     {
-        $this->stockCapacity= $stockCapacity;
+        if ($this->stockCapacity < $this->stockCapacity)
+            return 'in filling';
+        else
+            return 'full';
     }
 
-    const ALLOWED_ENERGIES = [
-        'fuel',
-        'electric',
-    ];
 }
